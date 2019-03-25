@@ -1,0 +1,30 @@
+---
+# file: tasks/install.yml
+
+- name: "Grafana > Install apt-transport-https to support https APT downloads"
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: "Grafana > Add Grafana repository key"
+  apt_key:
+    url: '{{ grafana_apt_key }}'
+    state: present
+  when: grafana_apt_key | string
+
+- name: "Grafana > Add Grafana repository"
+  apt_repository:
+    repo: '{{ grafana_apt_url }}'
+    state: present
+
+- name: "Grafana > Install package"
+  apt:
+    name: "{{ grafana_install_packages|default(grafana_install_packages_default, True) }}"
+    install_recommends: false
+    update_cache:       true
+    cache_valid_time:   3600
+
+- name: "Grafana > Ensure Grafana is started"
+  service:
+    name:  grafana
+    state: started

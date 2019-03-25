@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Aymeric Bringard
+  description: Install and configure Grafana.
+  company: "Aymeric Bringard, Conseil & Developpements"
+  license: license (MIT)
+  min_ansible_version: 1.9
+  platforms:
+  - name: Debian
+    versions:
+    - jessie
+    - stretch
+  galaxy_tags:
+    - web
+
+dependencies: []
