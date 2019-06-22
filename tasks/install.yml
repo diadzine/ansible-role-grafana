@@ -24,6 +24,11 @@
     update_cache:       true
     cache_valid_time:   3600
 
+- name: "Grafana > Ensure Grafana is enabled at boot"
+  service:
+    name:  grafana-server
+    enabled: yes
+
 - name: "Grafana > Ensure Grafana is started"
   service:
     name:  grafana-server
