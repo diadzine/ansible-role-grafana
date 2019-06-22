@@ -1,6 +1,11 @@
 ---
 # file: handlers/main.yml
 
+- name: grafana started
+  service:
+    name:  grafana-server
+    state: started
+
 - name: grafana restart
   service:
     name:  grafana-server
