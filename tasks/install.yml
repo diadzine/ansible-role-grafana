@@ -5,17 +5,20 @@
   apt:
     name: apt-transport-https
     state: present
+  become: yes
 
 - name: "Grafana > Add Grafana repository key"
   apt_key:
     url: '{{ grafana_apt_key }}'
     state: present
   when: grafana_apt_key | string
+  become: yes
 
 - name: "Grafana > Add Grafana repository"
   apt_repository:
     repo: '{{ grafana_apt_url }}'
     state: present
+  become: yes
 
 - name: "Grafana > Install package"
   apt:
@@ -23,13 +26,11 @@
     install_recommends: false
     update_cache:       true
     cache_valid_time:   3600
+  become: yes
+  notify: grafana started
 
 - name: "Grafana > Ensure Grafana is enabled at boot"
   service:
     name:  grafana-server
     enabled: yes
-
-- name: "Grafana > Ensure Grafana is started"
-  service:
-    name:  grafana-server
-    state: started
+  become: yes
