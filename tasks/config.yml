@@ -1,0 +1,12 @@
+---
+# file: tasks/config.yml
+
+- name: "Grafana > Config grafana.ini from template."
+  template:
+    src: 'grafana.ini.j2'
+    dest: "{{ grafana_conf_file }}"
+    owner: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    mode: 0644
+  become: yes
+  notify: grafana restart
